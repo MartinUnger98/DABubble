@@ -3,12 +3,12 @@
     "dabubble-5ec88": {
       "hosting": {
         "DABubble": [
-          "dabubble-5ec88"
+          "dabubble-b927a"
         ]
       }
     }
   },
   "projects": {
-    "default": "dabubble-5ec88"
+    "default": "dabubble-b927a"
   }
 }
