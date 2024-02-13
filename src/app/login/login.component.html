@@ -110,6 +110,7 @@
 
         <div *ngSwitchCase="'avatar'" class="container bg-white avatar-container">
           <div id="register-bg" class="overlay d-none"></div>
+          <mat-spinner *ngIf="showSpinner" class="matspinner"></mat-spinner> 
           <div id="register" class="popup d-none">
             <p>Konto erfolgreich erstellt!</p>
           </div>

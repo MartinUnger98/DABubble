@@ -371,6 +371,11 @@ h2 {
     }
 }
 
+.matspinner {
+    position: absolute;
+    z-index: 2;
+}
+
 footer {
     @include dFlex($g: 16px);
     position: absolute;

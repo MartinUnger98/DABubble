@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit{
   selectedAvatarIndex: number = -1;
   avatarFile: File | null = null;
   errorUploadFile: boolean = false;
-  hideAfterAnimation: boolean =false;
+  hideAfterAnimation: boolean = false;
+  showSpinner: boolean = false;
   avatarPaths = [
     'assets/avatars/avatar_1.svg',
     'assets/avatars/avatar_2.svg',
@@ -181,6 +182,8 @@ export class LoginComponent implements OnInit{
 
   async register() {
     this.loginErrorUser = false;
+    document.getElementById('register-bg')?.classList.remove("d-none");
+    this.showSpinner = true;
     if (this.avatarFile) {
       this.selectedAvatar = await this.storageService.uploadFile(this.avatarFile);
     }
@@ -198,6 +201,7 @@ export class LoginComponent implements OnInit{
     this.user.onlineStatus = false;
     this.user.avatar = this.selectedAvatar;
     this.userService.createUser(this.user, 'users');
+    this.showSpinner = false;
     this.commonService.showPopup('register');
     this.switchLogin('register')
   }
