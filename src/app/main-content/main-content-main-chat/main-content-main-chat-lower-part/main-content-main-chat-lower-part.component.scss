@@ -381,6 +381,9 @@
     position: absolute;
     margin-top: -430px;
     margin-left: 84px;
+    @media (max-width: 500px) {
+        margin-left: -46px;
+    }    
 }
 
 .d-none {

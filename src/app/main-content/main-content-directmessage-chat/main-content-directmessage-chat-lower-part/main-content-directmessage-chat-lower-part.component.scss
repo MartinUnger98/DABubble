@@ -586,6 +586,9 @@
     margin-top: -430px;
     margin-left: 84px;
     z-index: 2;
+    @media (max-width: 500px) {
+        margin-left: -46px;
+    }    
 }
 
 // chat input related code below
