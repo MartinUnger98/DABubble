@@ -21,6 +21,7 @@ export class MainContentDirectmessageChatLowerPartComponent implements AfterView
   @ViewChild('message') input_message!: ElementRef;
   @ViewChild('fileInputDirect') fileInput!: ElementRef
   @ViewChild('chat_content') chat_content!: ElementRef;
+  @ViewChild('message') messageTextArea!: ElementRef;
   @HostListener('document:click', ['$event'])
   documentClickHandler(event: MouseEvent): void {
     if (this.emoji_window_messages_open && !this.isClickInsideContainer(event)) {
@@ -126,6 +127,17 @@ export class MainContentDirectmessageChatLowerPartComponent implements AfterView
 
     if (text.length > 0) parts.push(text);
     return parts;
+  }
+
+  addAtSymbolToTextarea() {
+    const textarea: HTMLTextAreaElement = this.messageTextArea.nativeElement;
+    const startPos = textarea.selectionStart;
+    const endPos = textarea.selectionEnd;
+    const textBefore = textarea.value.substring(0, startPos);
+    const textAfter = textarea.value.substring(endPos, textarea.value.length);
+    textarea.value = textBefore + '@' + textAfter;
+    textarea.focus();
+    textarea.dispatchEvent(new Event('input'));    
   }
 
   /**

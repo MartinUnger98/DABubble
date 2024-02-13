@@ -94,7 +94,7 @@ section {
 .side-bar-channels {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 8px;
     @media (max-height: 800px) {
         gap: 0;
     }

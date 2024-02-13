@@ -721,6 +721,14 @@
         font-family: 'Nunito', sans-serif !important;
     }
 
+    @media (max-width: 470px) {
+        gap: 6px;
+        button {
+            padding: 15px;
+            font-size: 12px;
+        }
+    }
+
     .btn-submit {
         background-color: $Purple-1;
         cursor: pointer;
