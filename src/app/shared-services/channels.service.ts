@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, getDocs, query, where, writeBatch } from '@angular/fire/firestore';
+import { Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, getDocs, query, where, writeBatch, getDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Channel } from '../models/channel.class';
 import { BehaviorSubject, map, take } from 'rxjs';
@@ -219,6 +219,25 @@ export class ChannelsService {
     const querySnapshot = await getDocs(messagesRef);
     return querySnapshot.docs.map(doc => doc.data() as Message);
   }
+
+  async addUserToChannelIfNotMember(user: User): Promise<void> {
+    const channelId = 'XD5Fx4D0uf3td5AYjkMa'; // Die ID des Zielkanals
+    const channelRef = doc(this.firestore, `channels/${channelId}`);
+    const channelSnapshot = await getDoc(channelRef);
+    
+    if (channelSnapshot.exists()) {
+      let channel = channelSnapshot.data() as Channel;
+      const isMember = channel.members.some(member => member.id === user.id);
+      
+      if (!isMember) {
+        const updatedMembers: User[] = [...channel.members, user];
+        await updateDoc(channelRef, { members: updatedMembers });
+      } 
+    } else {
+      console.error('Kanal existiert nicht.');
+    }
+  }
+
 
 
   getChannelToFindMessage(messageId: string): Channel | undefined {

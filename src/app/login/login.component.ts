@@ -91,11 +91,25 @@ export class LoginComponent implements OnInit{
     }
   }
 
-  loginUser(userCredential: UserCredential) {
-    this.setUserOnline(userCredential);
-    this.commonService.showPopup('login');
-    this.commonService.routeTo('main-content', 2000);
+
+  async loginUser(userCredential: UserCredential) {    
+    await this.setUserOnline(userCredential);
+    const userId = userCredential.user.uid;
+    const userInfo = await this.userService.getUserInfos(userId);
+
+    if (userInfo) {
+      try {
+        await this.channelsService.addUserToChannelIfNotMember(userInfo);
+        this.commonService.showPopup('login');
+        this.commonService.routeTo('main-content', 2000);
+      } catch (error) {
+        console.error('Fehler beim Hinzufügen des Benutzers zum Kanal:', error);
+      }
+    } else {
+      console.log('Benutzerinformationen konnten nicht abgerufen werden.');
+    }
   }
+
 
   async setUserOnline(userCredential: UserCredential) {
     let userId = userCredential.user.uid;
