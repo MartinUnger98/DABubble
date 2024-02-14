@@ -25,9 +25,9 @@ section {
             padding: 12px 30px;
         }
 
-        @media (max-height: 800px) {
+        @media (max-height: 800px) and (max-width: 1180px) {
             margin-top: 20px;
-        }
+        }    
 
         &:focus {
             outline: none;
