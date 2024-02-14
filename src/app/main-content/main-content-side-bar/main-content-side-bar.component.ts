@@ -98,6 +98,7 @@ export class MainContentSideBarComponent {
     this.dataService.thread_open$.next(false);
     this.dataService.new_message_open$.next(false);
     this.dataService.workspace_header_open$.next(true);
+    this.dataService.show_new_message_btn$.next(false);
     let counter = 0;
     const intervalId = setInterval(() => {
       this.messagesService.dm_user$.next(user);
@@ -136,6 +137,7 @@ export class MainContentSideBarComponent {
     this.dataService.directmessage_open$.next(false);
     this.dataService.thread_open$.next(false);
     this.dataService.new_message_open$.next(false);
+    this.dataService.show_new_message_btn$.next(false);
     let counter = 0;
     const intervalId = setInterval(() => {
       this.channelsService.setSelectedChannel(channel);

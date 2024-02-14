@@ -11,11 +11,7 @@ import { AuthService } from '../shared-services/authentication.service';
 
 export class MainContentComponent implements OnInit {
   @ViewChild('grid') grid: any;
-  @HostListener('document:click', ['$event'])
-  @HostListener('document:keydown', ['$event'])
-  onUserActivity() {
-    this.resetUserActivityTimer();
-  }
+
   workspace_open: boolean = true;
   workspace_header_open: boolean = false;
   thread_open!: boolean;
@@ -25,61 +21,69 @@ export class MainContentComponent implements OnInit {
   mainchat_mobile_open: boolean = false;
   threadchat_mobile_open: boolean = false;
   btnMobile: boolean = false;
+  spinnerVisible: boolean = false; 
+  showNewMessageBtn: boolean = true;
   private userActivityTimeout: number = 15 * 60 * 1000;
   private userActivityTimer: any;
 
-  constructor(private dataService: DataService,
+  constructor(
+    private dataService: DataService,
     private channelService: ChannelsService,
-    private authService: AuthService,
-    ) {
-    this.dataService.thread_open$.subscribe((value: boolean) => {
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.subscribeToObservables();
+    this.dataService.mobile$.subscribe(isMobile => {
+      this.mobile = isMobile;
+      this.btnMobile = isMobile;
+    });
+    this.setCurrentUser();
+    this.channelService.subChannelsList();
+    this.startUserActivityTimer();
+  }
+
+  private subscribeToObservables(): void {
+    this.dataService.thread_open$.subscribe(value => {
       this.thread_open = value;
       this.resetUserActivityTimer();
     });
 
-    this.dataService.directmessage_open$.subscribe((value: boolean) => {
+    this.dataService.show_new_message_btn$.subscribe(value => {
+      this.showNewMessageBtn = value;
+    });
+
+    this.dataService.directmessage_open$.subscribe(value => {
       this.directmessage_open = value;
       this.resetUserActivityTimer();
     });
 
-    this.dataService.new_message_open$.subscribe((value: boolean) => {
+    this.dataService.new_message_open$.subscribe(value => {
       this.new_message_open = value;
     });
 
-    this.dataService.mobile$.subscribe((value: boolean) => {
-      this.mobile = value;
-      if (value) {
-        this.btnMobile = true
-      }
-    });
-
-    this.dataService.workspace_header_open$.subscribe((value: boolean) => {
+    this.dataService.workspace_header_open$.subscribe(value => {
       this.workspace_header_open = value;
-      if (!value) {
-        this.workspace_open = true;
-        this.btnMobile = true;
-      } else {
-        this.workspace_open = false;
-        this.btnMobile = false;
-      }
+      this.workspace_open = !value;
     });
 
-    this.dataService.mainchat_mobile_open$.subscribe((value: boolean) => {
+    this.dataService.mainchat_mobile_open$.subscribe(value => {
       this.mainchat_mobile_open = value;
     });
 
-    this.dataService.threadchat_mobile_open$.subscribe((value: boolean) => {
+    this.dataService.threadchat_mobile_open$.subscribe(value => {
       this.threadchat_mobile_open = value;
+    });
+
+    this.dataService.spinnerVisible$.subscribe(visible => {
+      this.spinnerVisible = visible;
     });
   }
 
-  ngOnInit(): void {
-    this.setCurrentUser();
-    this.channelService.subChannelsList();
-    if (!this.mobile) {
-      this.channelService.findNextAvailableChannel();
-    }
-    this.startUserActivityTimer();
+  @HostListener('document:click', ['$event'])
+  @HostListener('document:keydown', ['$event'])
+  onUserActivity() {
+    this.resetUserActivityTimer();
   }
 
   openNewMessageInputMobile() {
@@ -109,12 +113,12 @@ export class MainContentComponent implements OnInit {
 
   private startUserActivityTimer(): void {
     this.userActivityTimer = setTimeout(() => {
-      this.authService.logout(); 
+      this.authService.logout();
     }, this.userActivityTimeout);
   }
 
   private resetUserActivityTimer(): void {
-    clearTimeout(this.userActivityTimer); 
+    clearTimeout(this.userActivityTimer);
     this.startUserActivityTimer();
   }
 }

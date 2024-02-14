@@ -33,6 +33,9 @@
     <mat-icon *ngIf="!workspace_open">expand_more</mat-icon>
 </div>
 
-<div class="btn-mobile-new-message" (click)="openNewMessageInputMobile()" *ngIf="mobile && btnMobile">
+<div class="btn-mobile-new-message" (click)="openNewMessageInputMobile()" *ngIf="mobile && btnMobile && showNewMessageBtn">
     <img src="../../assets/img/edit_square_white.png">
+</div>
+<div *ngIf="spinnerVisible" class="spinner-container">
+    <mat-spinner></mat-spinner> 
 </div>

@@ -13,27 +13,26 @@ export class DataService {
   public mainchat_mobile_open$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public threadchat_mobile_open$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public update_sidebar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public spinnerVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public show_new_message_btn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   constructor() {
-    this.checkScreenSize();
-    this.checkScreenResize();
+    this.initializeScreenSizeListeners();
   }
 
-  checkScreenSize() {
-    const bildBreite = window.innerWidth;
-    if (bildBreite <= 1180) {
-      this.mobile$.next(true);
-    }
-  }
-
-  checkScreenResize() {
+  initializeScreenSizeListeners() {
+    this.updateMobileStatus(); // Überprüfe den Status sofort beim Laden
     window.addEventListener('resize', () => {
-      const bildBreite = window.innerWidth;
-      if (bildBreite <= 1180) {
-        this.mobile$.next(true);
-      } else {
-        this.mobile$.next(false);
-      }
+      this.updateMobileStatus(); // Aktualisiere den Status bei jeder Größenänderung
     });
+  }
+
+  updateMobileStatus() {
+    const bildBreite = window.innerWidth;
+    this.mobile$.next(bildBreite <= 1180);
+  }
+
+  showSpinner(visible: boolean) {
+    this.spinnerVisible$.next(visible);
   }
 }

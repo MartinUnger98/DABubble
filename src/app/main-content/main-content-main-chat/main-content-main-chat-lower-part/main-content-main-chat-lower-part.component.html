@@ -59,11 +59,11 @@
                     </div>
 
                     <div *ngIf="(thread_subject?.id == message.id && editingMessage)" class="speech-bubble-user-edit">
-                        <textarea (input)="changedTextMessage($event)" [attr.cols]="textareaCols" [attr.rows]="4"
+                        <textarea #textArea (input)="changedTextMessage($event)" [attr.cols]="textareaCols" [attr.rows]="4"
                             value="{{ textAreaContent }}"></textarea>
                         <div>
                             <button (click)="toggleEditing()" class="btn-cancel">Abbrechen</button>
-                            <button (click)="saveEditedMessage()" class="btn-save">Speichern</button>
+                            <button (click)="saveEditedMessage()" [disabled]="!textArea.value.trim()" class="btn-save">Speichern</button>
                         </div>
                     </div>
 

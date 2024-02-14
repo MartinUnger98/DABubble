@@ -9,7 +9,7 @@ import { DataService } from 'src/app/shared-services/data.service';
 export class MainContentWorkspaceHeaderComponent {
 
   constructor(
-    private dataService: DataService
+    public dataService: DataService
   ) { }
 
   returnToWorkspace() {
@@ -19,5 +19,6 @@ export class MainContentWorkspaceHeaderComponent {
     this.dataService.mainchat_mobile_open$.next(false);
     this.dataService.threadchat_mobile_open$.next(false);
     this.dataService.thread_open$.next(false);
+    this.dataService.show_new_message_btn$.next(true);
   }
 }

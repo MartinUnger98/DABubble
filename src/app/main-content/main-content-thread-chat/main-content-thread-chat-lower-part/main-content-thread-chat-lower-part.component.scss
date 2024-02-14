@@ -125,7 +125,15 @@
     font-size: 12px;
     font-weight: 700;
     padding: 4px 10px;
-    border-radius: 50px
+    border-radius: 50px;
+    &:disabled {
+        cursor: not-allowed !important;
+        background-color: $Purple-2;        
+        &:hover {
+          background-color: $Purple-2;
+          cursor: not-allowed !important;
+        }
+    }
 }
 
 .speech-bubble-user-edit {

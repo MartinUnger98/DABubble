@@ -612,6 +612,14 @@
     font-weight: 700;
     padding: 12px 25px;
     border-radius: 50px;
+    &:disabled {
+        cursor: not-allowed !important;
+        background-color: $Purple-2;        
+        &:hover {
+          background-color: $Purple-2;
+          cursor: not-allowed !important;
+        }
+    }
 
     @media (max-width:500px) {
         font-size: 16px;
