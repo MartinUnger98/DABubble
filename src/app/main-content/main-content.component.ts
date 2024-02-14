@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { DataService } from '../shared-services/data.service';
 import { ChannelsService } from '../shared-services/channels.service';
 import { AuthService } from '../shared-services/authentication.service';
-import { OpenDialogService } from '../shared-services/open-dialog.service';
 
 @Component({
   selector: 'app-main-content',
@@ -26,7 +25,7 @@ export class MainContentComponent implements OnInit {
   mainchat_mobile_open: boolean = false;
   threadchat_mobile_open: boolean = false;
   btnMobile: boolean = false;
-  private userActivityTimeout: number = 15 * 60 * 1000; // 15 Minuten in Millisekunden
+  private userActivityTimeout: number = 15 * 60 * 1000;
   private userActivityTimer: any;
 
   constructor(private dataService: DataService,

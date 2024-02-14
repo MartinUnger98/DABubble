@@ -25,7 +25,7 @@
           <div  class="avatar-list">
             <img *ngFor="let avatar of avatarPaths" (click)="changeAvatar(avatar)" [src]="avatar">
         </div>
-          <span class="error" *ngIf="errorUploadFile">Bitte wählen Sie eine gültige Datei!</span>
+          <span class="error" *ngIf="errorUploadFile">Bitte wählen Sie eine Datei unter 1.5MB und im jpg/jpeg/pdf/png-Format.</span>
       </div>
       
     <div *ngIf="!openAvatarSelection" class="name-input">

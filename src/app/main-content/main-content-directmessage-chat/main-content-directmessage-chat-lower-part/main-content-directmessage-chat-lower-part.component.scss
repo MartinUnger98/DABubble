@@ -578,7 +578,7 @@
 
 .emoji-window-messages {
     position: absolute;
-    z-index: 2;
+    z-index: 4;
 }
 
 .emoji-window {
@@ -598,6 +598,7 @@
     bottom: 0;
     width: -webkit-fill-available;
     min-height: 150px;
+    z-index: 1;
 }
 
 .chat-input {

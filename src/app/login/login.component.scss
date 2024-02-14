@@ -557,7 +557,7 @@ footer {
     }
 
     input,.submit-buttons button {
-        font-size: 13px;
+        font-size: 16px;
     }
 
     .privacy-container {
@@ -574,5 +574,8 @@ footer {
 @media (max-width: 380px) {
     .container {
         padding: 50px 6px;
+    }
+    .submit-buttons button {
+        font-size: 14px;
     }
 }

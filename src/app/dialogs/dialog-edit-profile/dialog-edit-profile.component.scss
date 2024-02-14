@@ -92,12 +92,17 @@ input[disabled] {
             opacity: 1;
             transform: scale(1.05);
         }
+
+        @media (max-width: 530px) {
+            width: 75px;
+        }
     }
 }
 
 .error {
     color: red;
     margin-top: 10px;
+    text-align: center;
 }
 
 .select-avatar-content {

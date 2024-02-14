@@ -29,7 +29,7 @@
             <div>
               <div class="input-container d-flex-standard cursor-pointer">
                 <img src="assets/icons/mail.svg">
-                <input #emailInputLogin="ngModel" type="email" matInput placeholder="beispielname@email.com" [(ngModel)]="user.email" name="email" required>
+                <input #emailInputLogin="ngModel" type="email" matInput placeholder="beispiel@email.com" [(ngModel)]="user.email" name="email" required>
                 <img src="assets/icons/empty.svg">
               </div>
               <span [class.show]="loginErrorUser" class="error-txt">*Diese E-Mail-Adresse ist leider ungültig.</span>   
@@ -74,7 +74,7 @@
               
               <div class="input-container d-flex-standard cursor-pointer">
                 <img src="assets/icons/mail.svg">
-                <input #emailInput="ngModel" type="email" matInput [(ngModel)]="user.email" name="email" placeholder="beispielname@email.com" required>
+                <input #emailInput="ngModel" type="email" matInput [(ngModel)]="user.email" name="email" placeholder="beispiel@email.com" required>
                 <img src="assets/icons/empty.svg">
               </div>
               <span [class.show]="(emailInput.invalid || !validateEmail(user.email) || loginErrorUser) && emailInput.dirty" class="error-txt">*Diese E-Mail-Adresse ist leider ungültig.</span>     
@@ -151,7 +151,7 @@
             <div>              
               <div class="input-container d-flex-standard cursor-pointer">
                 <img src="assets/icons/mail.svg">
-                <input #emailInputForgetPw="ngModel" type="email" matInput placeholder="beispielname@email.com" [(ngModel)]="user.email" name="email" required>
+                <input #emailInputForgetPw="ngModel" type="email" matInput placeholder="beispiel@email.com" [(ngModel)]="user.email" name="email" required>
                 <img src="assets/icons/empty.svg">
               </div>
               <span [class.show]="(loginErrorUser || !validateEmail(user.email)) && emailInputForgetPw.dirty" class="error-txt">*Diese E-Mail-Adresse ist leider ungültig.</span> 
