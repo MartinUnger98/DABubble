@@ -14,7 +14,7 @@
                     <h3>{{ thread_subject?.creator }}</h3>
                 </div>
     
-                <div *ngIf="thread_subject?.message" class="speech-bubble-user">
+                <div *ngIf="thread_subject?.message" class="anon-speech-bubble-user">
                     <div *ngFor="let part of formatMessageParts(thread_subject)"> 
                         <div *ngIf="isPartTag(part)" (click)="openProfile(part.id)">
                             <span class="space">_</span>
